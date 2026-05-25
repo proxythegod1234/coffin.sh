@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>coffin.sh — terms of service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: #050505;
+      color: #c9c9c9;
+      min-height: 100vh;
+    }
+
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.18) 2px,
+        rgba(0,0,0,0.18) 4px
+      );
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid #0f0f0f;
+      background: rgba(5,5,5,0.9);
+    }
+
+    .nav-logo {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #e03333;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-logo:hover { color: #ff4444; }
+
+    .back-link {
+      font-size: 11px;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: #e03333; }
+
+    .page {
+      position: relative;
+      z-index: 3;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 6rem 2rem 5rem;
+    }
+
+    .header {
+      margin-bottom: 3rem;
+    }
+
+    .header-label {
+      font-size: 10px;
+      color: #e03333;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .header-title {
+      font-size: 22px;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .header-meta {
+      font-size: 11px;
+      color: #2a2a2a;
+      letter-spacing: 0.06em;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, #e03333, transparent);
+      margin: 2rem 0;
+      opacity: 0.5;
+    }
+
+    .section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-num {
+      font-size: 10px;
+      color: #e03333;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: #888;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-body {
+      font-size: 12px;
+      color: #444;
+      line-height: 2;
+      letter-spacing: 0.03em;
+    }
+
+    .section-body a {
+      color: #e03333;
+      text-decoration: none;
+    }
+
+    .section-body a:hover {
+      text-decoration: underline;
+    }
+
+    ul.list {
+      list-style: none;
+      margin-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    ul.list li {
+      font-size: 12px;
+      color: #444;
+      line-height: 1.8;
+      padding-left: 1.2rem;
+      position: relative;
+      letter-spacing: 0.03em;
+    }
+
+    ul.list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: #e03333;
+      opacity: 0.5;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #0f0f0f;
+      font-size: 10px;
+      color: #1a1a1a;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer a {
+      color: #222;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer a:hover { color: #e03333; }
+
+    .status-dot {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background: #2a9d5c;
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .glow-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e03333, transparent);
+      opacity: 0.4;
+      z-index: 30;
+    }
+  </style>
+</head>
+<body>
+  <div class="scanlines"></div>
+  <div class="glow-line"></div>
+
+  <nav class="nav">
+    <a class="nav-logo" href="/">coffin.sh</a>
+    <a class="back-link" href="/">← back</a>
+  </nav>
+
+  <div class="page">
+
+    <div class="header">
+      <div class="header-label">legal</div>
+      <div class="header-title">terms of service</div>
+      <div class="header-meta"><span class="status-dot"></span>last updated — 2025</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-num">01</div>
+      <div class="section-title">acceptance</div>
+      <div class="section-body">
+        by accessing or using coffin.sh, you confirm that you have read, understood, and agree to be bound by these terms of service. if you do not agree, do not use this platform. we reserve the right to update these terms at any time without prior notice.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-num">02</div>
+      <div class="section-title">eligibility</div>
+      <div class="section-body">
+        you must be at least 13 years of age to use coffin.sh. by using this platform you represent that you meet this requirement. users under 18 must have parental or guardian consent.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-num">03</div>
+      <div class="section-title">accounts</div>
+      <div class="section-body">
+        you are responsible for maintaining the security of your account. coffin.sh is not liable for any loss or damage resulting from unauthorized access to your account. you agree to notify us immediately of any breach. accounts are non-transferable.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-num">04</div>
+      <div class="section-title">prohibited conduct</div>
+      <div class="section-body">the following are strictly prohibited on coffin.sh:</div>
+      <ul class="list">
+        <li>harassment, abuse, or threats directed at any user or staff member</li>
+        <li>posting or distributing illegal, harmful, or malicious content</li>
+        <li>impersonating other users, staff, or public figures</li>
+        <li>attempting to exploit, hack, or disrupt the platform or its infrastructure</li>
+        <li>using automated bots, scrapers, or scripts without explicit permission</li>
+        <li>sharing content that violates any applicable law or regulation</li>
+        <li>evading bans or restrictions through alternate accounts</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-num">05</div>
+      <div class="section-title">content</div>
+      <div class="section-body">
+        you retain ownership of any content you create on coffin.sh. by posting content, you grant coffin.sh a non-exclusive, royalty-free license to display and distribute it within the platform. we reserve the right to remove any content that violates these terms without notice.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-num">06</div>
+      <div class="section-title">termination</div>
+      <div class="section-body">
+        coffin.sh reserves the right to suspend or permanently ban any account at any time, for any reason, including but not limited to violations of these terms. banned users may not create new accounts without explicit permission from staff.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-num">07</div>
+      <div class="section-title">disclaimer</div>
+      <div class="section-body">
+        coffin.sh is provided "as is" without warranties of any kind. we do not guarantee uninterrupted access, data preservation, or freedom from errors. we are not liable for any damages arising from use of or inability to use the platform.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-num">08</div>
+      <div class="section-title">privacy</div>
+      <div class="section-body">
+        we collect only the data necessary to operate the platform. we do not sell your data to third parties. by using coffin.sh you consent to the collection and use of basic account information for platform functionality.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-num">09</div>
+      <div class="section-title">contact</div>
+      <div class="section-body">
+        for questions regarding these terms, reach out via <a href="mailto:proxy@coffin.sh">proxy@coffin.sh</a>.
+      </div>
+    </div>
+
+    <div class="footer">
+      <span><a href="/">coffin.sh</a></span>
+      <span>© 2025 coffin.sh — all rights reserved</span>
+    </div>
+
+  </div>
+</body>
+</html>
