@@ -271,7 +271,7 @@
     const btn = document.getElementById('login-btn');
 
     // Known profiles — add more here as needed
-    const profiles = ['proxy'];
+    const profiles = ['proxy', 'iracks'];
 
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Enter') handleAction();
@@ -286,7 +286,7 @@
       const raw = document.getElementById('username').value.trim();
       const val = raw.toLowerCase().replace(/^@/, '');
       if (profiles.includes(val)) {
-        window.location.href = '/proxy.html';
+        window.location.href = '/' + val + '.html';
       } else {
         handleLogin(val);
       }
