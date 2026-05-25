@@ -19,7 +19,7 @@
       overflow-x: hidden;
     }
 
-    /* ── bg ── */
+   
     .bg-photo {
       position: fixed;
       inset: 0;
@@ -37,7 +37,7 @@
         linear-gradient(to top, #050505 0%, transparent 40%);
     }
 
-    /* ── scanlines ── */
+  
     .scanlines {
       position: fixed;
       inset: 0;
@@ -52,7 +52,7 @@
       );
     }
 
-    /* ── noise overlay ── */
+  
     .noise {
       position: fixed;
       inset: 0;
@@ -62,7 +62,7 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* ── nav ── */
+   
     .nav {
       position: fixed;
       top: 0;
@@ -107,7 +107,7 @@
       50% { opacity: 0.3; }
     }
 
-    /* ── main layout ── */
+  
     .page {
       position: relative;
       z-index: 10;
@@ -118,7 +118,7 @@
       padding: 6rem 1.5rem 4rem;
     }
 
-    /* ── hero ── */
+    
     .hero {
       display: flex;
       flex-direction: column;
@@ -235,16 +235,22 @@
       font-style: italic;
     }
 
-    /* ── stats row ── */
+   
     .stats {
       display: flex;
       gap: 2.5rem;
       margin-bottom: 3rem;
       animation: fadeup 0.8s 0.15s ease both;
+      align-items: center;
     }
 
     .stat {
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 48px;
     }
 
     .stat-num {
@@ -268,7 +274,7 @@
       align-self: stretch;
     }
 
-    /* ── links ── */
+   
     .links {
       display: flex;
       flex-direction: column;
@@ -326,7 +332,7 @@
     .link-icon { opacity: 0.3; font-size: 10px; }
     .link-btn:hover .link-icon { opacity: 0.7; }
 
-    /* ── footer ── */
+   
     .footer {
       margin-top: 3rem;
       font-size: 9px;
@@ -347,7 +353,7 @@
 
 
 
-    /* ── red glow line top ── */
+   
     .glow-line {
       position: fixed;
       top: 0;
@@ -359,7 +365,7 @@
       z-index: 30;
     }
 
-    /* ── custom cursor ── */
+  
     * { cursor: none !important; }
 
     #cursor-canvas {
@@ -382,7 +388,7 @@
       filter: drop-shadow(0 0 4px rgba(200,0,0,0.8));
     }
 
-    /* ── volume slider ── */
+ 
     .volume-wrap {
       position: fixed;
       bottom: 1.5rem;
@@ -443,7 +449,7 @@
       letter-spacing: 0.06em;
     }
 
-    /* ── orbiting coffin ── */
+    
     #orbit-canvas {
       position: fixed;
       top: 0;
@@ -464,6 +470,7 @@
 
   <nav class="nav">
     <a class="nav-logo" href="/">coffin.sh</a>
+    <span class="nav-right"><span class="status-dot"></span>online</span>
   </nav>
 
   <div class="page">
@@ -489,8 +496,6 @@
     </div>
 
     <div class="stats">
-      <div class="stat">
-      </div>
       <div class="stat">
         <div class="stat-num">#1</div>
         <div class="stat-label">rank</div>
@@ -525,7 +530,7 @@
 
 
 
-  <!-- cursor arrow -->
+ 
   <svg id="cursor-svg" viewBox="0 0 14 22" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="cg" x1="0" y1="0" x2="1" y2="1">
@@ -537,7 +542,7 @@
           fill="url(#cg)" stroke="rgba(255,100,100,0.4)" stroke-width="0.6"/>
   </svg>
 
-  <!-- full-page coffin canvas -->
+ 
   <canvas id="cursor-canvas"></canvas>
 
   <script>
@@ -561,40 +566,40 @@
         svg.style.transform = `translate(${mx - 2}px,${my - 1}px)`;
       });
 
-      // ── coffin particle system ──
+    
       const coffins = [];
 
-      // Draw a coffin shape at (0,0), size ~w x h, then caller translates/rotates
+     
       function drawCoffin(ctx, w, h, alpha) {
-        // Coffin silhouette: hexagon-ish with wider shoulders, tapered foot
+       
         const hw = w / 2;
         ctx.beginPath();
-        ctx.moveTo(-hw * 0.6, -h / 2);         // top-left shoulder
-        ctx.lineTo( hw * 0.6, -h / 2);         // top-right shoulder
-        ctx.lineTo( hw,        -h * 0.1);      // right shoulder flare
-        ctx.lineTo( hw * 0.55,  h / 2);        // right foot
-        ctx.lineTo(-hw * 0.55,  h / 2);        // left foot
-        ctx.lineTo(-hw,        -h * 0.1);      // left shoulder flare
+        ctx.moveTo(-hw * 0.6, -h / 2);         
+        ctx.lineTo( hw * 0.6, -h / 2);        
+        ctx.lineTo( hw,        -h * 0.1);      
+        ctx.lineTo( hw * 0.55,  h / 2);      
+        ctx.lineTo(-hw * 0.55,  h / 2);       
+        ctx.lineTo(-hw,        -h * 0.1);      
         ctx.closePath();
 
-        // Dark fill with red tint
+     
         ctx.fillStyle = `rgba(12,4,4,${alpha * 0.92})`;
         ctx.fill();
 
-        // Red border
+    
         ctx.strokeStyle = `rgba(180,0,0,${alpha * 0.8})`;
         ctx.lineWidth = 0.8;
         ctx.stroke();
 
-        // Cross on coffin
+   
         ctx.strokeStyle = `rgba(160,0,0,${alpha * 0.5})`;
         ctx.lineWidth = 0.6;
-        // vertical
+   
         ctx.beginPath();
         ctx.moveTo(0, -h * 0.3);
         ctx.lineTo(0,  h * 0.15);
         ctx.stroke();
-        // horizontal
+     
         ctx.beginPath();
         ctx.moveTo(-hw * 0.35, -h * 0.1);
         ctx.lineTo( hw * 0.35, -h * 0.1);
@@ -609,7 +614,7 @@
           x:      mx,
           y:      my,
           vx:     Math.cos(angle) * speed,
-          vy:     Math.sin(angle) * speed - 1.5,  // slight upward bias
+          vy:     Math.sin(angle) * speed - 1.5, 
           gravity: 0.06 + Math.random() * 0.04,
           rot:    Math.random() * Math.PI * 2,
           rotV:   (Math.random() - 0.5) * 0.12,
@@ -622,7 +627,7 @@
 
       setInterval(() => {
         if (mx > 0) spawnCoffin();
-        if (mx > 0 && Math.random() < 0.4) spawnCoffin(); // occasional burst
+        if (mx > 0 && Math.random() < 0.4) spawnCoffin();
       }, 80);
 
       function draw() {
@@ -645,14 +650,14 @@
           drawCoffin(ctx, c.w, c.h, c.life);
           ctx.restore();
 
-          // Red glow trail dot
+         
           ctx.beginPath();
           ctx.arc(c.x, c.y, 1.2, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(200,0,0,${c.life * 0.4})`;
           ctx.fill();
         }
 
-        // Cap
+       
         if (coffins.length > 60) coffins.splice(0, coffins.length - 60);
 
         requestAnimationFrame(draw);
@@ -672,11 +677,11 @@
 
   <canvas id="orbit-canvas"></canvas>
 
-  <!-- background music -->
+ 
   <div id="yt-player" style="position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;pointer-events:none;z-index:-1;"></div>
 
   <script>
-    // Load YouTube iframe API
+  
     var tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(tag);
@@ -770,7 +775,7 @@
         trail.push({ x, y, angle });
         if (trail.length > TRAIL_LEN) trail.shift();
 
-        // Trail
+  
         for (let i = 0; i < trail.length; i++) {
           const t = trail[i];
           const p = i / trail.length;
@@ -781,7 +786,7 @@
           ctx.restore();
         }
 
-        // Main coffin with glow
+ 
         ctx.save();
         ctx.translate(x, y);
         ctx.rotate(angle + Math.PI / 2);
